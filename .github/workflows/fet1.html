@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fethappy - Veilig & Uniek</title>
+    <style>
+        /* --- CORE STYLING (Roze Tintens & Sfeer) --- */
+        :root {
+            --main-pink: #ff007f;       /* Leuk fel roze */
+            --soft-pink: #ffcce3;       /* Zacht roze voor achtergronden */
+            --deep-purple: #1a0b2e;     /* Donkere paarse ondergrond (veiligheid) */
+            --glass-bg: rgba(255, 255, 255, 0.1); /* Doorzichtig glas */
+            --text-glow: 0 0 10px rgba(255, 0, 127, 0.8);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--deep-purple);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* --- HERO SECTIE (De eerste indruk) --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            padding: 20px;
+            background: radial-gradient(circle at center, #2d154b 0%, var(--deep-purple) 70%);
+            position: relative;
+        }
+
+        /* Subtiele achtergrond animatie voor sfeer */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjUiIGZpbGw9InJnYmEoMjU1LDAsMCwwLCAxKSIvPjwvc3ZnPg=='); /* Patroon voor textuur */
+            opacity: 0.2;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: var(--text-glow);
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            max-width: 600px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            z-index: 2;
+        }
+
+        /* --- BELANGRIJK: DE SECTIE VOOR VEILIGHEID & ZELFZELF --- */
+        .safety-zone {
+            margin-top: -50px; /* Ligging over de hero sectie */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px); /* Glas effect */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .safety-zone h2 {
+            color: var(--main-pink);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+            text-align: center;
+            border: 1px solid var(--soft-pink);
+            transition: transform 0.3s ease, background 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 0, 127, 0.2);
+        }
+
+        /* --- NAVIGATIE (Interactief) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 11, 46, 0.8); /* Doorschijnend paars */
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--main-pink);
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--main-pink);
+            text-shadow: 2px 2px 4px #000;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* De 6 Items */
+        .nav-item {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Interactie: Mouse over effect */
+        .nav-item:hover {
+            background: var(--main-pink);
+            color: #fff;
+            box-shadow: 0 0 20px var(--main-pink);
+            border-color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* --- RECHTSE KANT (Account, Vrienden, Uitloggen) --- */
+        .user-panel {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff00cc, #39005e);
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px var(--main-pink);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--main-pink);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: var(--main-pink);
+            box-shadow: 0 0 15px var(--main-pink);
+        }
+
+        /* Responsive voor mobiel */
+        @media (max
+        /* (from previous code block) */
+    }
+</style>
+</head>
+<body>
+
+    <!-- 1. NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="brand">FETHAPPY<span style="font-size: 0.8em; color: #fff;">.</span></div>
+        
+        <div class="nav-menu">
+            <a href="#" class="nav-item">Home</a>
+            <a href="#" class="nav-item">Features</a>
+            <a href="#" class="nav-item">About</a>
+            <a href="#" class="nav-item">Contact</a>
+        </div>
+
+        <div class="user-panel">
+            <span style="font-size: 0.9rem; margin-right: 10px;">Account:</span>
+            <div class="avatar-placeholder"></div>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <section class="hero">
+        <h1>Welcome to the Safe Space</h1>
+        <p class="subtitle">Where your true self is allowed to shine without judgment. Your journey starts here.</p>
+    </section>
+
+    <!-- 3. SAFETY & FEATURES SECTION -->
+    <section class="safety-zone">
+        <h2>Your Safe Haven</h2>
+        <p style="text-align: center; margin-bottom: 30px; color: #ddd;">
+            Experience a community built on trust, privacy, and emotional connection.
+        </p>
+
+        <div class="features">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <h3 style="color: var(--main-pink);">🛡️ Secure</h3>
+                <p>Your data is yours alone. We prioritize your privacy above everything.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <h3 style="color: var(--main-pink);">✨ Expressive</h3>
+                <p>Showcase your art and thoughts in a vibrant, judgment-free environment.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <h3 style="color: var(--main-pink);">❤️ Community</h3>
+                <p>Connect with friends who truly understand and support your journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FOOTER -->
+    <footer style="background: #0f0518; padding: 40px; text-align: center; color: #888;">
+        <h2 style="color: var(--main-pink); margin-bottom: 10px;">Fethappy</h2>
+        <p>&copy; 2023 Fethappy Platform. All rights reserved.</p>
+        <div style="margin-top: 20px; font-size: 0.8rem;">
+            <a href="#" style="color: #666; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="#" style="color: #666; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+        </div>
+    </footer>
+
+</body>
+</html>
